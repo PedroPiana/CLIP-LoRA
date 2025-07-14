@@ -5,9 +5,11 @@ methods = [
 "CLIP-MoLE"
 ]
 datasets = [
-"oxford_pets"
+"oxford_pets",
+"oxford_flowers",
+"eurosat"
 ]
-shots_list = [1, 2, 4]
+shots_list = [16]
 seeds = [1]
 num_experts_list = [2, 4, 6]
 
@@ -20,7 +22,7 @@ os.makedirs(logs_dir, exist_ok=True)
 os.makedirs(error_dir, exist_ok=True)
 os.makedirs(results_dir, exist_ok=True)
 
-for method, dataset, shots, seed, num_experts in itertools.product(methods, datasets, shots_list, seeds, num_experts_list):
+for method, dataset, shots, seed, num_experts,  in itertools.product(methods, datasets, shots_list, seeds, num_experts_list):
     rank = 2
     alpha = 16
     
