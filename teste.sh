@@ -16,13 +16,11 @@ pip install --no-index torch torchvision torchaudio ftfy scipy regex tqdm gdown 
 export TQDM_DISABLE=1
 
 PYTHONWARNINGS="ignore" python3 main.py \
---root_path /home/pedro36/projects/def-leszek/pedro36/datasets/DATA \
+--root_path /home/pedro36/links/projects/def-leszek/pedro36/datasets/DATA \
 --dataset oxford_pets \
 --seed 1 \
 --shots 1 \
 --num_experts 2 \
---topk 2 \
---lambda_balance 0.1 \
 --save_path weights \
 --filename "CLIP-MoLE_oxford_pets"
     

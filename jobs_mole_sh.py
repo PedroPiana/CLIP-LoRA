@@ -34,7 +34,7 @@ for method, dataset, shots, seed, num_experts,  in itertools.product(methods, da
 #SBATCH --output={logs_dir}/{job_name}.out
 #SBATCH --error={error_dir}/{job_name}.err
 #SBATCH --mem=32G
-#SBATCH --time=03:00:00
+#SBATCH --time=05:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --gpus-per-node=1
@@ -47,7 +47,7 @@ pip install --no-index torch torchvision torchaudio ftfy scipy regex tqdm gdown 
 export TQDM_DISABLE=1
 
 PYTHONWARNINGS="ignore" python3 main.py \\
---root_path /home/pedro36/projects/def-leszek/pedro36/datasets/DATA \\
+--root_path /home/pedro36/links/projects/def-leszek/pedro36/datasets/DATA \\
 --dataset {dataset} \\
 --seed {seed} \\
 --shots {shots} \\

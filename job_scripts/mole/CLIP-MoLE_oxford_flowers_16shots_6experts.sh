@@ -3,7 +3,7 @@
 #SBATCH --output=logs_scripts/mole/CLIP-MoLE_oxford_flowers_16shots_6experts.out
 #SBATCH --error=error_scripts/mole/CLIP-MoLE_oxford_flowers_16shots_6experts.err
 #SBATCH --mem=32G
-#SBATCH --time=03:00:00
+#SBATCH --time=05:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --gpus-per-node=1
@@ -16,7 +16,7 @@ pip install --no-index torch torchvision torchaudio ftfy scipy regex tqdm gdown 
 export TQDM_DISABLE=1
 
 PYTHONWARNINGS="ignore" python3 main.py \
---root_path /home/pedro36/projects/def-leszek/pedro36/datasets/DATA \
+--root_path /home/pedro36/links/projects/def-leszek/pedro36/datasets/DATA \
 --dataset oxford_flowers \
 --seed 1 \
 --shots 16 \
