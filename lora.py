@@ -37,6 +37,9 @@ def run_lora(args, clip_model, logit_scale, dataset, train_loader, val_loader, t
     
     VALIDATION = False
     
+    total_params = sum(p.numel() for p in clip_model.parameters())
+    print(f"Total parâmetros CLIP: {total_params: }")
+
     # Peso do balance loss
     lambda_balance = args.lambda_balance
     
@@ -67,6 +70,10 @@ def run_lora(args, clip_model, logit_scale, dataset, train_loader, val_loader, t
     list_lora_layers = apply_lora(args, clip_model)
     clip_model = clip_model.cuda() 
     
+    lora_params = sum(p.numel() for n, p in clip_model.named_parameters() if 'lora_' in n or 'router' in n)
+    print(f"Parâmetros adicionados pelo MoLE: {lora_params: }")
+
+
     if args.eval_only:
         load_lora(args, list_lora_layers)
         acc_test = evaluate_lora(args, clip_model, test_loader, dataset)
@@ -168,6 +175,13 @@ def run_lora(args, clip_model, logit_scale, dataset, train_loader, val_loader, t
     
     acc_test = evaluate_lora(args, clip_model, test_loader, dataset)
     print("**** Final test accuracy: {:.2f}. ****\n".format(acc_test))
+
+    percentual = 100 * lora_params / total_params
+    print(f">>> Rank: {args.rank}")
+    print(f">>> LoRA adiciona: {lora_params:,} parâmetros")
+    print(f">>> Total do modelo: {total_params:,} parâmetros")
+    print(f">>> Porcentagem adicionada: {percentual:.2f}%")
+
     
     if args.save_path != None:
         save_lora(args, list_lora_layers)
